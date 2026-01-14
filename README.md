@@ -26,7 +26,9 @@ This repository demonstrates the algorithmic logic using **synthetic data genera
 ### 2. The Math: "Signal Score"
 I developed a scoring formula that penalizes empty hype. A trend is only valuable if adoption outpaces virality.
 
-$$\text{Signal Score} = \frac{\% \text{ Adoption Growth}}{\text{Normalized Viral Intensity}}$$
+$$
+\text{Signal Score} = \frac{\text{Adoption Growth } \%}{\text{Normalized Viral Intensity}}
+$$
 
 * **High Score (>40):** The trend is growing faster than the hype (Real Demand).
 * **Low Score (<15):** The hype is louder than the adoption (Noise).
