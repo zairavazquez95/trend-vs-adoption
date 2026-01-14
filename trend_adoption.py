@@ -1,6 +1,4 @@
-# ------------------------------
 # Style Signals: Trend ≠ Adoption
-# ------------------------------
 
 import pandas as pd
 import matplotlib.pyplot as plt
@@ -8,9 +6,7 @@ import numpy as np
 import random
 import os
 
-# ------------------------------
-# 1️⃣ Curated Fashion / Beauty Trends
-# ------------------------------
+#  Beauty Trends:
 FASHION_BEAUTY_TRENDS = [
     "coquette",
     "mobwife",
@@ -26,10 +22,9 @@ FASHION_BEAUTY_TRENDS = [
 
 WEEKS = list(range(1, 7))  # 6-week window
 
-# ------------------------------
-# 2️⃣ Simulated TikTok Viral Behavior
+# Simulated TikTok Viral Behavior
 # (Posting / visibility behavior)
-# ------------------------------
+
 tiktok_data = []
 
 for trend in FASHION_BEAUTY_TRENDS:
@@ -47,9 +42,8 @@ for trend in FASHION_BEAUTY_TRENDS:
 
 df_tiktok = pd.DataFrame(tiktok_data)
 
-# ------------------------------
-# 3️⃣ Adoption Profiles (Real Wearing Behavior)
-# ------------------------------
+
+# Adoption Profiles 
 ADOPTION_PROFILES = {
     "adopted": lambda: np.cumsum(np.random.randint(1, 3, size=6)) + 20,
     "performative": lambda: np.random.randint(18, 22, size=6),
@@ -57,9 +51,7 @@ ADOPTION_PROFILES = {
     "dormant": lambda: np.array([12, 13, 13, 14, 14, 15])
 }
 
-# ------------------------------
-# 4️⃣ Editorial Classification (Your POV)
-# ------------------------------
+
 TREND_ADOPTION_TYPE = {
     "coquette": "performative",
     "mobwife": "burnout",
@@ -73,18 +65,16 @@ TREND_ADOPTION_TYPE = {
     "neutralpalette": "dormant"
 }
 
-# ------------------------------
-# 5️⃣ Generate Adoption Signals
-# ------------------------------
+# Adoption Signals
+
 adoption_data = {}
 
 for trend in FASHION_BEAUTY_TRENDS:
     profile = TREND_ADOPTION_TYPE[trend]
     adoption_data[trend] = ADOPTION_PROFILES[profile]()
 
-# ------------------------------
-# 6️⃣ Plot: Viral vs Adoption
-# ------------------------------
+#  Viral vs Adoption
+
 os.makedirs("charts", exist_ok=True)
 
 for trend in FASHION_BEAUTY_TRENDS:
@@ -115,9 +105,8 @@ for trend in FASHION_BEAUTY_TRENDS:
 
 print("✅ Charts saved in /charts folder")
 
-# ------------------------------
-# 7️⃣ SIGNAL SCORE CALCULATION
-# ------------------------------
+# SIGNAL SCORE CALCULATION
+
 signal_scores = []
 
 for trend in FASHION_BEAUTY_TRENDS:
@@ -148,9 +137,9 @@ signal_df["signal_score"] = (
     signal_df["adoption_growth_pct"] / signal_df["viral_norm"]
 ).round(2)
 
-# ------------------------------
-# 8️⃣ Signal Labels (Content-Ready)
-# ------------------------------
+
+# Signal Labels
+
 def label_signal(score):
     if score > 40:
         return "Strong Signal"
@@ -172,12 +161,11 @@ signal_df = signal_df.sort_values(
 print("\n📊 STYLE SIGNALS RANKING\n")
 print(signal_df)
 
-# ------------------------------
-# 9️⃣ Save Outputs
-# ------------------------------
+#  Save Outputs
+
 df_tiktok.to_csv("style_signals_tiktok_weekly.csv", index=False)
 signal_df.to_csv("style_signals_scores.csv", index=False)
 
-print("\n✅ CSVs saved:")
+print("CSVs saved")
 print("- style_signals_tiktok_weekly.csv")
 print("- style_signals_scores.csv")
